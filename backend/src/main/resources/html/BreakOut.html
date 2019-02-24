@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打砖块</title>
+    <link rel="stylesheet"
+          href="//aip.bdstatic.com/portal/dist/1524483206437/css/technology/nlp-sentiment_classify.style.css" />
+    <link rel="stylesheet"
+          href="//aip.bdstatic.com/portal/dist/1524743737041/css/vendor.style.css">
+    <link rel="stylesheet"
+          href="//aip.bdstatic.com/portal/dist/1524743737041/css/newDocument/newDocument.style.css">
+</head>
+<style>
+    /**{margin:0;padding:0;}*/
+    body{
+        width:100%;
+        /*height:10000000px;*/
+    }
+    #mask{
+        display:block;
+        background:rgba(0,0,0,0.8);
+        width:100%;
+        height:100%;
+        position:fixed;//利用固定定位的好处：页面还可以上下翻动，但是始终处于灰色背景下
+    }
+    #loginArea{
+        display:block;
+        background:white;
+        width:400px;
+        height:250px;
+        position:absolute;
+        left:50%;
+        top:50%;
+        padding: 10px;
+        border-radius: 10px;
+        margin-left:-200px;
+        margin-top:-125px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    #userName,#password,#ruserName,#rpassword{
+        position: relative;
+        left: 20px;
+        top:40px;
+    }
+    #loginButton,#register,#back,#complete,#adminButton{
+        position: relative;
+        left: 10px;
+        top: 70px;
+    }
+    label{
+        position: relative;
+        /*left: 0px;*/
+        border-radius: 2px;
+        top: 40px;
+    }
+</style>
+<style type="text/css">
+    #upload:hover {
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    ul li:hover {
+        color: red;
+    }
+
+    .bread-crumb-item:hover {
+        cursor: pointer;
+        color: red;
+    }
+
+
+
+</style>
+
+<body id="body"  background="/medusa/static/img/timg.jpg">
+<div id="game" style="display: block;text-align: center">
+    <div id="mask" style=""></div>
+    <div id="loginArea" style="">
+        <div id="loginL">
+            <label> 姓名</label><input id="userName" name="userName" placeholder="请输入姓名"> <br><br>
+            <label>密码</label><input id="password" name="password" placeholder="请输入密码(字母，数字组合)"><br>
+            <button id="loginButton" >普通登陆</button> &nbsp;
+            <button id="register" onclick="change2()">注册</button>&nbsp;
+            <button id="adminButton" >管理员登陆</button>
+        </div>
+        <div id="registerInfo" style="display: none">
+            <label> 注册姓名</label><input id="ruserName" name="ruserName" placeholder="请输入姓名"> <br><br>
+            <label>注册密码</label><input id="rpassword" name="rpassword" placeholder="请输入密码(字母，数字组合)"><br>
+            <button id="back" onclick="change1()">返回</button> &nbsp;
+            <button id="complete" onclick="check()">完成</button>
+        </div>
+
+    </div>
+
+    <div id="trueBody" style="display: none">
+        <h1>hello there:</h1>
+
+
+        <form action="#">
+            <!--<label for="id">Id: </label><input id="id" type="text" />-->
+            <!--<label for="name">Name: </label><input id="name" type="text" />-->
+            RoomId: <input id="roomId" type="text" />
+            <input id="join" type="button" value="Join!"/>
+            弹幕：<input id="msgDan" type="text" /> <input id="send" type="button" value="发送!"/>
+        </form>
+    </div>
+
+
+    <br>
+    <canvas id="GameView1" tabindex="1"></canvas>
+    <!--<canvas id="GameView2" tabindex="1" width="400px" height="600px"></canvas>-->
+    <!--<canvas id="canvas" tabindex="1" >-->
+    <div id="playground"></div>
+    <!--<script type="text/javascript" src="game.js"></script>-->
+
+    <img id="canvasPic" src="/medusa/static/img/bg.jpg" style="width: 0px;">
+    <img id="canvasPaddle" src="/medusa/static/img/board.png" style="width: 0px;">
+    <img id="canvasBrick" src="/medusa/static/img/0.png" style="width: 0px;">
+    <img id="canvasBrick1" src="/medusa/static/img/1.png" style="width: 0px;">
+    <img id="canvasBrick2" src="/medusa/static/img/2.png" style="width: 0px;">
+    <img id="canvasBrick3" src="/medusa/static/img/3.png" style="width: 0px;">
+    <img id="canvasBall" src="/medusa/static/img/ball.png" style="width: 0px;">
+    <img id="red_diamond" src="/medusa/static/img/element_red_diamond.png" style="width: 0px;">
+    <img id="paddleBlu" src="/medusa/static/img/paddleBlu.png" style="width: 0px;">
+    <img id="paddleRed" src="/medusa/static/img/paddleRed.png" style="width: 0px;">
+    <script type="text/javascript">
+        function change2() {
+            var a = document.getElementById("loginL")
+            var b = document.getElementById("registerInfo")
+            a.setAttribute("style","display:none")
+            b.setAttribute("style","display:true")
+        }
+        function change1() {
+            var a = document.getElementById("loginL")
+            var b = document.getElementById("registerInfo")
+            a.setAttribute("style","display:true")
+            b.setAttribute("style","display:none")
+
+        }
+        function check() {
+            var a = document.getElementById("ruserName")
+            var b = document.getElementById("rpassword")
+            if(a==null || a.length==0 ||b==null||b.length==0){
+                alert("用户名或密码为空！")
+            }
+        }
+    </script>
+</div>
+
+<div id="admin" style="display: none">
+    <div class="category category-show"  style="width:250px">
+        <div class="category-direction">
+            <span>操作目录</span>
+            <!--<span class="ai-icon ai-icon-arrow arrow-left"></span>-->
+        </div>
+        <div class="row-fluid">
+            <div class="category-tree-menu">
+                <ul id="xxl"
+                    class="tree-node non-leaf-node level-1 non-leaf-collapsed"
+                    style="list-style-type: none;margin-top:-1px">
+                    <li><a id="decription" href="#"
+                           style="color: #000000; text-decoration: none; font-size: 14px" onclick="change3()"><i
+                            class="icon-chevron-right"></i>操作说明</a></li>
+                    <li><a id="userInfoL" href="#"
+                           style="color: #000000; text-decoration: none; font-size: 14px" onclick="change4()"><i
+                            class="icon-chevron-right"></i>用户信息查看</a></li>
+                    <li><a id="wordcloud" href="#"
+                           style="color: #000000; text-decoration: none; font-size: 14px"><i
+                            class="icon-chevron-right"></i>游戏信息查看</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="main-content doc-shrink" style="margin-left:-20px">
+
+        <div class="bread-crumb-container" style="">
+            <div class="bread-crumb">
+                <div class="bread-crumb-inner">
+                    <span class="bread-crumb-item"></span>
+                </div>
+            </div>
+            <div class="ai-doc-search-container"></div>
+        </div>
+        <div id="change1" style="display: block">
+            <div class="doc-container" style="height: 650px; overflow: hidden;">
+                <div class="doc-inner" style="height: 100px">
+                    <h1 id="89828646" style="margin-top: -50px; width: 1800px">操作说明</h1>
+                </div>
+                <div class="doc-inner">
+                    <h1 id="8a61ca9e" style="margin-top:-30px">简介</h1>
+                    <p>Hi，您好，欢迎使用打砖块管理员服务。</p>
+                    <p>管理员主要拥有以下权限：</p>
+                    <ul>
+                        <li>管理员可以查看用户的非隐私性信息，如对战数据等</li>
+                        <li>管理员还可以对违规用户进行封禁</li>
+                        <li>管理员的其他权限仍在开发中，敬请期待</li>
+                    </ul>
+                    <h1 id="63c991b3" style="margin-top:-50px">使用说明</h1>
+                    <p>为了能够更好的使用本系统，请您严格按照操作说明进行操作</p>
+                    <ul>
+                        <li>春江潮水连海平，海上明月共潮生。滟滟随波千万里，何处春江无月明！ </li>
+                        <li>江流宛转绕芳甸，月照花林皆似霰；空里流霜不觉飞，汀上白沙看不见。</li>
+                        <li>江天一色无纤尘，皎皎空中孤月轮。江畔何人初见月？江月何年初照人？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="change2" style="display: none">
+            <div class="doc-container" style="width: 1230px; height: 700px; overflow: hidden;">
+                <div class="doc-inner" style="height: 100px">
+                    <h1 id="89828647" style="margin-top: -50px; width: 1800px">用户信息查看</h1>
+                </div>
+                <div style="margin-top: 60px; height: 20px; width: 2000px; border-bottom: 1px solid #eeeeee"></div>
+                <div class="bread-crumb-container" style="margin-top: 130px">
+                    <div class="bread-crumb">
+                        <div id="bread-crumb-inner" class="bread-crumb-inner">
+                            <div id="bci-1" class="bread-crumb-item all" onclick="changeColor('bci-1')">ID</div>
+                            <div id="bci-2" class="bread-crumb-item" style="margin-left: 40px" onclick="changeColor('bci-2')">NAME</div>
+                            <div id="bci-3" class="bread-crumb-item" style="margin-left: 40px" onclick="changeColor('bci-3')">PASSWORD</div>
+                            <div id="bci-4" class="bread-crumb-item" style="margin-left: 40px" onclick="changeColor('bci-3')">DISABLED</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data_list" style="padding-top: 40px; width: 1200px; height: 240px">
+
+                    <div>
+                        <table class="table table-hover table-striped table-bordered">
+                            <tbody><tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>PASSWORD</th>
+                                <th>DISABLED</th>
+                            </tr>
+
+                            </tbody></table>
+                    </div>
+                    <div align="center">
+                        <font color="red"></font>
+                    </div>
+                    <div class="pagination pagination-centered" style="margin-top: -30px">
+                        <ul></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function change3() {
+            var a = document.getElementById("change1")
+            var b = document.getElementById("change2")
+            a.setAttribute("style","display:block")
+            b.setAttribute("style","display:none")
+        }
+        function change4() {
+            var a = document.getElementById("change1")
+            var b = document.getElementById("change2")
+            a.setAttribute("style","display:none")
+            b.setAttribute("style","display:block")
+
+        }
+    </script>
+</div>
+
+
+<script type="text/javascript" src="/medusa/static/jsFile/frontend-fastopt/20190108"></script>
+
+</body>
+</html>

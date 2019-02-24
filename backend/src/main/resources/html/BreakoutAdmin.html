@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打砖块管理员</title>
+    <link rel="stylesheet"
+          href="//aip.bdstatic.com/portal/dist/1524483206437/css/technology/nlp-sentiment_classify.style.css" />
+    <link rel="stylesheet"
+          href="//aip.bdstatic.com/portal/dist/1524743737041/css/vendor.style.css">
+    <link rel="stylesheet"
+          href="//aip.bdstatic.com/portal/dist/1524743737041/css/newDocument/newDocument.style.css">
+
+</head>
+
+<style type="text/css">
+    #upload:hover {
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    ul li:hover {
+        color: red;
+    }
+
+    .bread-crumb-item:hover {
+        cursor: pointer;
+        color: red;
+    }
+
+    /*.bs-docs-sidenav {*/
+        /*background-color: #fff;*/
+        /*border-radius: 6px;*/
+        /*box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);*/
+        /*padding: 0;*/
+        /*width: 228px;*/
+    /*}*/
+
+    /*.bs-docs-sidenav>li>a {*/
+        /*border: 1px solid #e5e5e5;*/
+        /*display: block;*/
+        /*padding: 8px 14px;*/
+        /*margin: 0 0 -1px;*/
+    /*}*/
+
+    /*.bs-docs-sidenav>li:first-child>a {*/
+        /*border-radius: 6px 6px 0 0;*/
+    /*}*/
+
+    /*.bs-docs-sidenav>li:last-child>a {*/
+        /*border-radius: 0 0 6px 6px;*/
+    /*}*/
+
+    /*.bs-docs-sidenav>.active>a {*/
+        /*border: 0 none;*/
+        /*box-shadow: 1px 0 0 rgba(0, 0, 0, 0.1) inset, -1px 0 0*/
+        /*rgba(0, 0, 0, 0.1) inset;*/
+        /*padding: 9px 15px;*/
+        /*position: relative;*/
+        /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);*/
+        /*z-index: 2;*/
+    /*}*/
+
+    /*.bs-docs-sidenav .icon-chevron-right {*/
+        /*float: right;*/
+        /*margin-right: -6px;*/
+        /*margin-top: 2px;*/
+        /*opacity: 0.25;*/
+    /*}*/
+
+    /*.bs-docs-sidenav>li>a:hover {*/
+        /*background-color: #f5f5f5;*/
+    /*}*/
+
+    /*.bs-docs-sidenav a:hover .icon-chevron-right {*/
+        /*opacity: 0.5;*/
+    /*}*/
+
+    /*.bs-docs-sidenav .active .icon-chevron-right, .bs-docs-sidenav .active a:hover .icon-chevron-right*/
+    /*{*/
+        /*background-image: url("../img/glyphicons-halflings-white.png");*/
+        /*opacity: 1;*/
+    /*}*/
+
+</style>
+<body>
+<div id="game"></div>
+<div id="admin">
+<div class="category category-show"  style="width:250px">
+    <div class="category-direction">
+        <span>操作目录</span>
+        <!--<span class="ai-icon ai-icon-arrow arrow-left"></span>-->
+    </div>
+    <div class="row-fluid">
+        <div class="category-tree-menu">
+            <ul id="xxl"
+                class="tree-node non-leaf-node level-1 non-leaf-collapsed"
+                style="list-style-type: none;margin-top:-1px">
+                <li><a href="#"
+                       style="color: #000000; text-decoration: none; font-size: 14px"><i
+                        class="icon-chevron-right"></i>操作说明</a></li>
+                <li><a href="#"
+                       style="color: #000000; text-decoration: none; font-size: 14px"><i
+                        class="icon-chevron-right"></i>用户信息查看</a></li>
+                <li><a id="wordcloud" href="#"
+                       style="color: #000000; text-decoration: none; font-size: 14px"><i
+                        class="icon-chevron-right"></i>游戏信息查看</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="main-content doc-shrink" style="margin-left:-20px">
+
+    <div class="bread-crumb-container" style="">
+        <div class="bread-crumb">
+            <div class="bread-crumb-inner">
+                <span class="bread-crumb-item"></span>
+            </div>
+        </div>
+        <div class="ai-doc-search-container"></div>
+    </div>
+    <div id="change1" style="display: none">
+    <div class="doc-container" style="height: 650px; overflow: hidden;">
+        <div class="doc-inner" style="height: 100px">
+            <h1 id="89828646" style="margin-top: -50px; width: 1800px">操作说明</h1>
+        </div>
+        <div class="doc-inner">
+            <h1 id="8a61ca9e" style="margin-top:-30px">简介</h1>
+            <p>Hi，您好，欢迎使用基于机器学习的电影评论情感分析服务。</p>
+            <p>本系统主要提供以下功能服务：</p>
+            <ul>
+                <li>体验区是作为您使用本系统的先行功能，您可以在体验区输入任意评论来查看我们的分析预测能力，体验区地址：<a href="http://localhost:8080/SentimentAnalysis/index.jsp" style="text-decoration:none">http://localhost:8080/SentimentAnalysis/index.jsp</a></li>
+                <li>本系统可以对您上传的批量文本进行情感分类</li>
+                <li>本系统还可以根据您提供的批量数据文本进行情感走势图的绘制</li>
+                <li>本系统还可以根据您提供的批量数据文本进行分析评论的关注点，分析大众对于影片的关注方面</li>
+            </ul>
+            <h1 id="63c991b3" style="margin-top:-50px">使用说明</h1>
+            <p>为了能够更好的使用本系统，请您严格按照操作说明进行操作</p>
+            <ul>
+                <li>批量评论文本测试、情感走势图、关注点功能都是基于您所提供的测试文本进行的，请务必先在批量评论文本测试界面进行数据上传并提交</li>
+                <li>情感走势图的绘制是基于您所提供的文本，为了能够更好的反应大众对于影片的情感趋势，请上传足够多的文本</li>
+                <li>如果您的数据量较大，分析时间可能较长，请勿频繁的点击</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div id="change2" style="display: block">
+        <div class="doc-container" style="width: 1230px; height: 700px; overflow: hidden;">
+            <div class="doc-inner" style="height: 100px">
+                <h1 id="89828647" style="margin-top: -50px; width: 1800px">用户信息查看</h1>
+            </div>
+            <div style="margin-top: 60px; height: 20px; width: 2000px; border-bottom: 1px solid #eeeeee"></div>
+            <div class="bread-crumb-container" style="margin-top: 130px">
+                <div class="bread-crumb">
+                    <div id="bread-crumb-inner" class="bread-crumb-inner">
+                        <div id="bci-1" class="bread-crumb-item all" onclick="changeColor('bci-1')">ID</div>
+                        <div id="bci-2" class="bread-crumb-item" style="margin-left: 40px" onclick="changeColor('bci-2')">NAME</div>
+                        <div id="bci-3" class="bread-crumb-item" style="margin-left: 40px" onclick="changeColor('bci-3')">PASSWORD</div>
+                        <div id="bci-4" class="bread-crumb-item" style="margin-left: 40px" onclick="changeColor('bci-3')">DISABLED</div>
+                    </div>
+                </div>
+            </div>
+            <div class="data_list" style="padding-top: 40px; width: 1200px; height: 240px">
+
+                <div>
+                    <table class="table table-hover table-striped table-bordered">
+                        <tbody><tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>PASSWORD</th>
+                            <th>DISABLED</th>
+                        </tr>
+
+                        </tbody></table>
+                </div>
+                <div align="center">
+                    <font color="red"></font>
+                </div>
+                <div class="pagination pagination-centered" style="margin-top: -30px">
+                    <ul></ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

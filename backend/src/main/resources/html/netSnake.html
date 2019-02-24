@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>medusa</title>
+</head>
+<style>
+  *{margin:0;padding:0;}
+  body{
+    width:100%;
+    /*height:10000000px;*/
+  }
+  #mask{
+    display:block;
+    background:rgba(0,0,0,0.02);
+    width:100%;
+    height:100%;
+    position:fixed;//利用固定定位的好处：页面还可以上下翻动，但是始终处于灰色背景下
+  }
+  #login{
+    display:block;
+    background:white;
+    width:400px;
+    height:250px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left:-200px;
+    margin-top:-125px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+  }
+  input{
+    position: relative;
+    left: 100px;
+    top:40px;
+  }
+  button{
+    position: relative;
+    left: 100px;
+    top: 70px;
+  }
+  label{
+    position: relative;
+    top: 40px;
+  }
+</style>
+<body>
+
+  <br>
+
+
+  <canvas id="BGPic" tabindex="0"  style="position:absolute;z-index:2;left: 0px; top: 0px;"></canvas>
+  <canvas id="GameMap" tabindex="3" style="position:absolute;z-index:3;left: 0px; bottom: 0px;"></canvas>
+  <canvas id="GameInfo" tabindex="2" style="position:absolute;z-index:4;left: 0px; top:0px;"></canvas>
+  <canvas id="GameView" tabindex="1"  style="position:absolute;z-index:1;left: 0px; top: 0px;"></canvas>
+<!--0 .0 -->
+  <div id="startBg"  tabindex="4" style="position:absolute;z-index: 5;left: 0px; top: 0px;background: rgba(0, 0, 0, 0.9)">
+    <!--<div id="mask" style=""></div>-->
+    <!--<div id="login" style="">-->
+      <!--<input type="radio" name="model" value="join" onchange="change()"><label>加入房间</label><input id="room" name="room" placeholder="请输入房间号(可选)"> <br>-->
+      <!--<input type="radio" name="model" value="create" onchange="change()"><label>创建房间</label><input id="password" name="password" placeholder="请输入房间密码(字母，数字组合)"><br>-->
+      <!--<button id="joinRoom" disabled="disabled">Join Room</button> &nbsp;-->
+      <!--<button id="createRoom" disabled="disabled">Create Room</button>-->
+    <!--</div>-->
+    <!--<form action="#" style=" width: 300px;margin: 200px auto;">-->
+      <!--&lt;!&ndash;<div id="nameExist" style="font-size: larger;height: 50px;width: 300px;color: red;text-align: center"> </div>&ndash;&gt;-->
+      <!--&lt;!&ndash;<label for="name" style="color: white">Name: </label><input id="name" type="text" />&ndash;&gt;-->
+      <!--&lt;!&ndash;<input id="join" type="button" value="Join!"/>&ndash;&gt;-->
+    <!--</form>-->
+  </div>
+  <img id="canvasPic" src="/medusa/static/img/bg2.png" style="width: 0px;">
+  <img id="maxPic" src="/medusa/static/img/champion.png" style="width: 0px;">
+  <img id="killerImg" src="/medusa/static/img/killer.png" style="width: 0px;">
+  <img id="championSnake" src="/medusa/static/img/championSnake.png" style="width: 0px;">
+  <div>
+    <!--<button type="button" id="reconnect" style="position:absolute;z-index:6;left: 650px; top: 300px;width: 150px; height: 50px; font-size: 18px; color: #fff; background:#102928; border-radius: 5px; box-shadow: 3px 2px 2px 2px #16384d "> Reconnect</button>-->
+    <button type="button" id="reconnect" style="display: none"> Reconnect</button>
+  </div>
+  <!--<script type="text/javascript">-->
+    <!--function change() {-->
+        <!--var radio = document.getElementsByName("model")-->
+        <!--var jBt = document.getElementById("joinRoom")-->
+        <!--var cBt = document.getElementById("createRoom")-->
+        <!--var rInput = document.getElementById("room")-->
+        <!--for(var i = 0; i < radio.length; i++) {-->
+            <!--if (radio[i].checked) {-->
+
+                <!--i++;-->
+
+                <!--if(radio[&#45;&#45;i].value == "join"){-->
+                    <!--cBt.disabled = true-->
+                    <!--jBt.disabled = false-->
+                    <!--rInput.disabled = false-->
+                <!--}else{-->
+                    <!--jBt.disabled = true-->
+                    <!--cBt.disabled = false-->
+                    <!--rInput.disabled = true-->
+                <!--}-->
+
+            <!--}-->
+
+        <!--}-->
+    <!--}-->
+  <!--</script>-->
+
+  <script type="text/javascript" src="/medusa/static/jsFile/frontend-fastopt/20190108"></script>
+  <!--<script type="text/javascript" src="/medusa/frontend-launcher.js"></script>-->
+
+
+</body>
+</html>
